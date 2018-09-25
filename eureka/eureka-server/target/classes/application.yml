@@ -1,0 +1,28 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+#    enableSelfPreservation: false
+    eviction-interval-timer-in-ms: 1000  #//清理间隔（单位毫秒，默认是60*1000）
+    renewalPercentThreshold: 0.49
+#    register-with-eureka: false
+#    fetch-registry: false
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+
+
+
+#Eurake有一个配置参数eureka.server.renewalPercentThreshold，定义了renews 和renews threshold的比值，默认值为0.85。
+#当server在15分钟内，比值低于percent，即少了15%的微服务心跳，server会进入自我保护状态，Self-Preservation。在此状态下，
+#server不会删除注册信息，这就有可能导致在调用微服务时，实际上服务并不存在。
+#这种保护状态实际上是考虑了client和server之间的心跳是因为网络问题，而非服务本身问题，不能简单的删除注册信息
+#
+#stackoverflow上，有人给出的建议是：
+#2、在本机器上测试的时候，可以把比值调低，比如0.49
+#3、或者简单粗暴把自我保护模式关闭

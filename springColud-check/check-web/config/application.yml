@@ -1,0 +1,46 @@
+server:
+    port: 8764
+    tomcat:
+        uri-encoding: UTF-8
+spring:
+    application:
+        name: microservice-ipharmacare-check
+    messages:
+        encoding: UTF-8
+    http:
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+    datasource:
+        db:
+            driver-class-name: com.mysql.jdbc.Driver
+            url: jdbc:mysql://10.1.1.32:3306/ipharmacare_pull?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true&useAffectedRows=true&useSSL=true&allowMultiQueries=true
+            username: root
+            password: ipharmacare
+eureka:
+  client:
+     serviceUrl:
+        defaultZone: http://127.0.0.1:8761/eureka/
+     healthcheck:
+        enabled: true
+     instance:
+        leaseExpirationDurationInSeconds: 30
+        leaseRenewalIntervalInSeconds: 10
+
+##打开feign-hystrix
+feign:
+  hystrix:
+    enabled: true
+
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 6000
+#请求连接的超时时间
+  ConnectTimeout: 5000
+
+#数据库存储过期天数
+expireDay: 30
+
+logging:
+  config: config/logback-spring.xml
