@@ -21,12 +21,15 @@ spring:
 eureka:
   client:
      serviceUrl:
-        defaultZone: http://127.0.0.1:8761/eureka/
+        defaultZone: http://127.0.0.1:8761/eureka/ #注册中心地址
      healthcheck:
         enabled: true
-     instance:
-        leaseExpirationDurationInSeconds: 30
-        leaseRenewalIntervalInSeconds: 10
+  instance:
+    hostname: 127.0.0.1 #本地ip
+    instance-id: 127.0.0.1:8764 #本地ip
+    prefer-ip-address: true #以IP地址注册到服务中心，相互注册使用IP地址
+    leaseExpirationDurationInSeconds: 30 #心跳 可以不配置
+    leaseRenewalIntervalInSeconds: 10 #心跳 可以不配置
 
 ##打开feign-hystrix
 feign:
